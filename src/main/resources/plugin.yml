@@ -1,0 +1,21 @@
+name: CombatPlusPlus
+version: '${version}'
+main: com.ludvig.combatplus.CombatPlusPlusPlugin
+api-version: '1.21'
+folia-supported: true
+authors: [ludvig2457]
+description: Combat++ - 1.8.9, 1.12 and modern combat systems for Paper/Folia.
+website: https://github.com/ludvig2457
+commands:
+  combat:
+    description: View or change the combat system.
+    usage: /combat [1.8.9|1.12|1.21.11|info|reload]
+    aliases: [combatsystem]
+    permission: combatplus.use
+permissions:
+  combatplus.use:
+    description: Allows viewing the combat system.
+    default: true
+  combatplus.admin:
+    description: Allows changing or reloading the combat system.
+    default: op

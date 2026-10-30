@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.ludvig'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+    maven { url = uri('https://repo.papermc.io/repository/maven-public/') }
+}
+
+dependencies {
+    def legacyPaper = mcVersion.startsWith('1.16')
+    compileOnly(legacyPaper
+            ? "com.destroystokyo.paper:paper-api:${mcVersion}"
+            : "io.papermc.paper:paper-api:${mcVersion}")
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21
+}
+
+processResources {
+    filesMatching('plugin.yml') {
+        expand(version: project.version)
+    }
+}
+
+tasks.jar {
+    archiveBaseName = 'CombatPlusPlus'
+    manifest {
+        attributes(
+            'Implementation-Title': 'CombatPlusPlus',
+            'Implementation-Version': project.version
+        )
+    }
+}
